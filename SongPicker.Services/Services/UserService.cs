@@ -1,36 +1,38 @@
 ﻿using MongoDB.Driver;
 using SongPicker.Services.Interfaces;
 using SongPicker.Services.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace SongPicker.Services.Services
 {
-    public class SongService : ISongService
+    public class UserService : IUserService
     {
-        public bool AddSong(Song song)
+        public bool CreateUser(UserCreate user)
         {
-            try
+            ////TODO: validator
+            
+            if (user.Password != user.RepeatedPassword)
             {
-                var collection = GetCollection<Song>("SongPicker", "Songs");
-                collection.InsertOne(song);
-            } 
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
                 return false;
             }
+
+            //// insert into db
 
             return true;
         }
 
-        public List<Song> GetByName(string name)
+        public bool Login(UserLogin user)
         {
-            var collection = GetCollection<Song>("SongPicker", "Songs");
-            var result = collection.Find(x => x.Name == name).ToList();
+            ////TODO: validator 
+            
+            if (user == null)
+            {
+                return false;
+            }
 
-            return result;
+            //// login
+
+            return true;
         }
 
         private IMongoCollection<T> GetCollection<T>(string databaseName, string collectionName) where T : class

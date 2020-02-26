@@ -1,10 +1,12 @@
 ﻿namespace SongPicker.Services.Models
 {
-    using System.ComponentModel.DataAnnotations;
     using MongoDB.Bson;
+    using System.ComponentModel.DataAnnotations;
 
     public class Song
     {
+        public ObjectId Id { get; set; }
+
         [Required]
         public string Name { get; set; }
 

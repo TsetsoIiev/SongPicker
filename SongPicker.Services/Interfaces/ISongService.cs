@@ -1,10 +1,12 @@
 ﻿namespace SongPicker.Services.Interfaces
 {
     using SongPicker.Services.Models;
-    using System.Threading.Tasks;
+    using System.Collections.Generic;
 
     public interface ISongService
     {
-        Task<bool> AddSong(Song song);
+        bool AddSong(Song song);
+
+        List<Song> GetByName(string name);
     }
 }
