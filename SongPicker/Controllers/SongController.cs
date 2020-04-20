@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Net;
     using Microsoft.AspNetCore.Mvc;
+    using SongPicker.Services.Enums;
     using SongPicker.Services.Interfaces;
     using SongPicker.Services.Models;
 
@@ -21,7 +22,7 @@
         [Route("/song")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public IActionResult Post([FromBody]Song song)
+        public IActionResult Post([FromBody]SongCreate song)
         {
             var result = songService.AddSong(song);
 
@@ -44,13 +45,22 @@
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public IActionResult GetByAllAttributes(string parameter, int attribute)
+        public IActionResult GetbyAttribute(string parameter, SongAttribute attribute)
         {
-            //var result = songService.GetByAttribute(parameter, attribute);
+            var result = songService.GetByAttribute(parameter, attribute);
 
-            //return result != null && result.Any() ? (IActionResult)Ok(result) : NotFound();
+            return result != null && result.Any() ? (IActionResult)Ok(result) : NotFound();
+        }
 
-            return Ok();
+        [HttpGet]
+        [Route("/song/all")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public IActionResult GetByAllAttributes(string parameter)
+        {
+            var result = songService.GetByAllAttributes(parameter);
+
+            return result != null && result.Any() ? (IActionResult)Ok(result) : NotFound();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace SongPicker.Services.Enumerations
+﻿namespace SongPicker.Services.Enums
 {
     public enum SongAttribute
     {

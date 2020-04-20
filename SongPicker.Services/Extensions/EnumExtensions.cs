@@ -1,6 +1,6 @@
 ﻿namespace SongPicker.Services.Extensions
 {
-    using SongPicker.Services.Enumerations;
+    using SongPicker.Services.Enums;
     using System;
 
     public static class EnumExtensions

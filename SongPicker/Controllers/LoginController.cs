@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SongPicker.Services.Models;
-using SongPicker.Services.Interfaces;
-using System.Net;
-using System.Threading.Tasks;
-
-namespace SongPicker.Controllers
+﻿namespace SongPicker.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using SongPicker.Services.Models;
+    using SongPicker.Services.Interfaces;
+    using System.Net;
+
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
