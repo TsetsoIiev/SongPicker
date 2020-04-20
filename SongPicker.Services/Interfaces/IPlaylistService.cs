@@ -8,6 +8,6 @@
 
         Playlist AddSongToPlaylist(Playlist playlist, Song song);
 
-        Playlist AddSongByNameToPlaylist(Playlist playlist, string songName);
+        Playlist AddSongByNameToPlaylist(string playlistIdStr, string songName);
     }
 }

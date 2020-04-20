@@ -17,8 +17,6 @@
 
         public IEnumerable<Song> Songs { get; set; }
 
-        public User UserCreated { get; set; }
-
         public DateTime DateCreated { get; set; }
     }
 }

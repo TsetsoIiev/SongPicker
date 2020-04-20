@@ -28,23 +28,12 @@
         }
 
         [HttpPost]
-        [Route("/playlist/song")]
+        [Route("/playlist/{playlistId}/{songName}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public IActionResult AddSong([FromBody]Playlist playlist,[FromBody] Song song)
+        public IActionResult AddSong(string playlistId, string songName)
         {
-            var result = playlistService.AddSongToPlaylist(playlist, song);
-
-            return Ok(result);
-        }
-
-        [HttpPost]
-        [Route("/playlist/{songName}")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public IActionResult AddSong([FromBody]Playlist playlist, [FromBody] string songName)
-        {
-            var result = playlistService.AddSongByNameToPlaylist(playlist, songName);
+            var result = playlistService.AddSongByNameToPlaylist(playlistId, songName);
 
             return Ok(result);
         }

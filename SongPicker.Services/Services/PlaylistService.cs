@@ -22,8 +22,7 @@
                 Id = new ObjectId(),
                 Name = playlistCreate.Name,
                 Songs = new List<Song>(),
-                DateCreated = DateTime.Now,
-                UserCreated = null //TODO
+                DateCreated = DateTime.Now
             };
 
             try
@@ -51,12 +50,16 @@
             return playlist;
         }
 
-        public Playlist AddSongByNameToPlaylist(Playlist playlist, string songName)
+        public Playlist AddSongByNameToPlaylist(string playlistIdStr, string songName)
         {
+            ObjectId.TryParse(playlistIdStr, out ObjectId playlistId);
+
             var songCollection = GetCollection<Song>("SongPicker", "Songs");
             var songToAdd = songCollection.Find(x => x.Name == songName).FirstOrDefault();
 
             var playlistcollection = GetCollection<Playlist>("SongPicker", "Playlists");
+            var playlist = playlistcollection.Find(x => x.Id == playlistId).SingleOrDefault();
+
             var songs = playlistcollection.AsQueryable().FirstOrDefault().Songs.ToList();
             songs.Add(songToAdd);
 
