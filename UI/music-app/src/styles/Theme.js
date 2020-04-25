@@ -20,6 +20,11 @@ let theme= createMuiTheme ({
             paper: {
                 padding: '10px 20px',
             }
+        },
+        MuiCardMedia: {
+            root: {
+               backgroundSize:'contain', 
+            },
         }
     }
 })

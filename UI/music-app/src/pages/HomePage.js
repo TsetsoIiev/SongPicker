@@ -8,9 +8,6 @@ import AppInfo from '../components/AppInfo'
 import ListSongs from '../components/ListSongs'
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        backgroundColor: '#cfe8fc',
-    },
     div: {
         display: 'block',
     }

@@ -10,13 +10,21 @@ import List from '@material-ui/core/List';
 
 const axios = require('axios');
 
-function SimpleDialog(props) {
-    const { onClose, selectedValue, open } = props;
+export default function AddASongDialog() {
+    const [open, setOpen] = useState(false);
     const [name, setName] = useState('');
     const [artist, setArtist] = useState('');
     const [album, setAlbum] = useState('');
     const [genre, setGenre] = useState('');
     const [year, setYear] = useState(0);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -46,13 +54,13 @@ function SimpleDialog(props) {
             genre: genre,
             year: year
         });
-        
+
         axios({
             method: 'post',
             url: 'http://localhost:64363/api/Song',
             data: data
         }).then((result) => {
-            console.log(result)
+            console.log(result);
         }).catch((error) => {
             console.log(error);
         });
@@ -68,42 +76,25 @@ function SimpleDialog(props) {
         console.log(result);
     };
 
-
     return (
-        <Dialog open={open} maxWidth="sm">
-            <DialogTitle id="simple-dialog-title">Add A Song</DialogTitle>
-            <form onSubmit={handleAddASongFormSubmit} >
-                <TextField fullWidth required margin="dense" id="name" label="Name" variant="outlined" onChange={handleNameChange} />
-                <TextField fullWidth required margin="dense" id="artist" label="Artist" variant="outlined" onChange={handleArtistChange} />
-                <TextField fullWidth required margin="dense" id="album" label="Album" variant="outlined" onChange={handleAlbumChange} />
-                <TextField fullWidth required margin="dense" id="genre" label="Genre" variant="outlined" onChange={handleGenreChange} />
-                <TextField fullWidth required margin="dense" id="year" label="Year" variant="outlined" onChange={handleYearChange} />
-                <List>
-                    <Button variant="contained" color="primary" type="submit">Ok</Button>
-                    <Button variant="contained">Cancel</Button>
-                </List>
-            </form>
-        </Dialog>
-    );
-}
-
-export default function SimpleDialogDemo() {
-    const [open, setOpen] = useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    return (
-        <div>
+        <>
             <Button variant="outlined" onClick={handleClickOpen}>
                 Add A Song
-      </Button>
-            <SimpleDialog open={open} onClose={handleClose} />
-        </div>
+            </Button>
+            <Dialog open={open} onClose={handleClose} maxWidth="sm">
+                <DialogTitle id="simple-dialog-title">Add A Song</DialogTitle>
+                <form onSubmit={handleAddASongFormSubmit} >
+                    <TextField fullWidth required margin="dense" id="name" label="Name" variant="outlined" onChange={handleNameChange} />
+                    <TextField fullWidth required margin="dense" id="artist" label="Artist" variant="outlined" onChange={handleArtistChange} />
+                    <TextField fullWidth required margin="dense" id="album" label="Album" variant="outlined" onChange={handleAlbumChange} />
+                    <TextField fullWidth required margin="dense" id="genre" label="Genre" variant="outlined" onChange={handleGenreChange} />
+                    <TextField fullWidth required margin="dense" id="year" label="Year" variant="outlined" onChange={handleYearChange} />
+                    <List>
+                        <Button variant="contained" color="primary" type="submit">Ok</Button>
+                        <Button variant="contained" onClick={handleClose}>Cancel</Button>
+                    </List>
+                </form>
+            </Dialog>
+        </>
     );
 }
