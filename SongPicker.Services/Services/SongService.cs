@@ -19,6 +19,8 @@
                 return null;
             }
 
+            int.TryParse(songCreate.Year, out int songYear);
+
             var song = new Song
             {
                 Id = new ObjectId(),
@@ -26,7 +28,7 @@
                 Album = songCreate.Album,
                 Artist = songCreate.Artist,
                 Genre = songCreate.Genre,
-                Year = songCreate.Year
+                Year = songYear
             };
 
             try
@@ -41,6 +43,14 @@
             }
 
             return song;
+        }
+
+        public List<Song> GetAll()
+        {
+            var collection = GetCollection<Song>("SongPicker", "Songs");
+
+            var result = collection.AsQueryable().ToList();
+            return result;
         }
 
         public List<Song> GetByAttribute(string parameter, SongAttribute attribute)

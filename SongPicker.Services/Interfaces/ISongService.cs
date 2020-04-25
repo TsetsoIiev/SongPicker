@@ -13,5 +13,7 @@
         List<Song> GetByAllAttributes(string parameter);
 
         List<Song> GetByAttribute(string parameter, SongAttribute attribute);
+        
+        List<Song> GetAll();
     }
 }

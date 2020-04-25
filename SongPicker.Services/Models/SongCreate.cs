@@ -17,6 +17,6 @@
         public string Album { get; set; }
 
         [Required]
-        public int Year { get; set; }
+        public string Year { get; set; }
     }
 }

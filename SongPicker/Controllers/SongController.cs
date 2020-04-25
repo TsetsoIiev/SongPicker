@@ -1,13 +1,14 @@
-﻿namespace SongPicker.Controllers
-{
-    using System.Linq;
-    using System.Net;
-    using Microsoft.AspNetCore.Mvc;
-    using SongPicker.Services.Enums;
-    using SongPicker.Services.Interfaces;
-    using SongPicker.Services.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using Microsoft.AspNetCore.Mvc;
+using SongPicker.Services.Enums;
+using SongPicker.Services.Interfaces;
+using SongPicker.Services.Models;
 
-    [Route("api/song")]
+namespace SongPicker.Controllers
+{
+    [Route("api/[controller]")]
     [ApiController]
     public class SongController : ControllerBase
     {
@@ -19,14 +20,19 @@
         }
 
         [HttpPost]
-        [Route("/song")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Post([FromBody]SongCreate song)
-        {
+            {
             var result = songService.AddSong(song);
 
             return Ok(result);
+        }
+
+        [HttpGet]
+        public IEnumerable<Song> Get()
+        {
+            var result = songService.GetAll();
+
+            return result;
         }
 
         [HttpGet]
@@ -53,7 +59,7 @@
         }
 
         [HttpGet]
-        [Route("/song/all")]
+        [Route("/song")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public IActionResult GetByAllAttributes(string parameter)

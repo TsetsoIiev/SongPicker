@@ -1,6 +1,9 @@
 {
   "name": "music-app",
   "version": "0.1.0",
+  "permissions": [
+    "http://localhost:4000"
+  ],
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.11",
@@ -8,6 +11,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.19.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
