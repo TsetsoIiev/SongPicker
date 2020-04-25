@@ -11,8 +11,7 @@ import AddASongDialog from './AddASongDialog';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        // backgroundColor: '#cfe8',
-        marginTop: '5vh',
+        marginTop: theme.spacing(6),
         height: '30vh',
         display: 'flex',
         flexDirection: 'column',
@@ -30,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         backgroundColor: '#817CC1',
-        marginLeft: theme.spacing(1),
+        marginLeft: theme.spacing(2),
         color: '#FFFFFF'
     }
 }));

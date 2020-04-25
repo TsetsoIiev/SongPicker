@@ -7,11 +7,10 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
+import MediaControlCard from './MediaControlCard';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        backgroundColor: '#cfe8',
-        height: '52vh',
         margin: theme.spacing(1),
     },
     div: {
@@ -27,11 +26,8 @@ export default function Create() {
 
     return (
         <div className={classes.div}>
-            <Typography variant="h5" gutterBottom align="left">
-                My songs
-            </Typography>
             <Container maxWidth="md" className={classes.container}>
-            Something in the way..  
+                <MediaControlCard />
             </Container>
         </div>
     );
