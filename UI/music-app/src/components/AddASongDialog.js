@@ -46,28 +46,20 @@ function SimpleDialog(props) {
             genre: genre,
             year: year
         });
-        
-        axios({
-            method: 'post',
-            url: 'http://localhost:64363/api/Song',
-            data: data
-        }).then((result) => {
-            console.log(result)
-        }).catch((error) => {
-            console.log(error);
-        });
 
-        const result = axios({
-            method: 'get',
-            url: 'http://localhost:64363/api/Song'
-        }).then((result) => {
-            console.log(result)
-        }).catch((error) => {
-            console.log(error);
-        });
-        console.log(result);
+        let axiosConfig = {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                "Access-Control-Allow-Origin": "*",
+            }
+          };
+
+          const body = JSON.stringify({ name, artist, album, genre, year });
+
+        axios.post('http://localhost:64363/api/Song', body, axiosConfig)
+        .then( response  => console.log(response))
+        .catch( error => console.log(error));
     };
-
 
     return (
         <Dialog open={open} maxWidth="sm">
