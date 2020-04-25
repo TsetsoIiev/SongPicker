@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-evenly',
         flexDirection: 'row',
+        margin: theme.spacing(1),
     },
     content: {
         flex: '1 0 auto',
@@ -37,6 +38,24 @@ const useStyles = makeStyles((theme) => ({
 export default function MediaControlCard() {
     const classes = useStyles();
     const theme = useTheme();
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        fetch("http://localhost:64363/api/Song")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                    console.log(error);
+                }
+            )
+    }, [])
 
     return (
         <Card className={classes.root}>
@@ -46,23 +65,23 @@ export default function MediaControlCard() {
                 title="YOU ARE WE"
             />
             <CardContent className={classes.content}>
-                    <Typography component="h5" variant="h5">
-                        Steal the sun
+                <Typography component="h5" variant="h5">
+                    Steal the sun
                     </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                        While She Sleeps
+                <Typography variant="subtitle1" color="textSecondary">
+                    While She Sleeps
                      </Typography>
             </CardContent>
             <div className={classes.controls}>
-                    <IconButton aria-label="previous">
-                        {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
-                    </IconButton>
-                    <IconButton aria-label="play/pause">
-                        <PlayArrowIcon className={classes.playIcon} />
-                    </IconButton>
-                    <IconButton aria-label="next">
-                        {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-                    </IconButton>
+                <IconButton aria-label="previous">
+                    {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
+                </IconButton>
+                <IconButton aria-label="play/pause">
+                    <PlayArrowIcon className={classes.playIcon} />
+                </IconButton>
+                <IconButton aria-label="next">
+                    {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
+                </IconButton>
             </div>
         </Card>
     );
