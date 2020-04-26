@@ -21,7 +21,7 @@ namespace SongPicker.Controllers
 
         [HttpPost]
         public IActionResult Post([FromBody]SongCreate song)
-            {
+        {
             var result = songService.AddSong(song);
 
             return Ok(result);

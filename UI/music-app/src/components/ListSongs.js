@@ -9,6 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import MediaControlCard from './MediaControlCard';
 
+const axios = require('axios');
+
 const useStyles = makeStyles((theme) => ({
     container: {
         margin: theme.spacing(1),
@@ -21,8 +23,19 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const getSongs = async () => {
+    try {
+        const response = await axios.get('http://localhost:64363/api/Song');
+        console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export default function Create() {
     const classes = useStyles();
+    getSongs();
 
     return (
         <div className={classes.div}>
