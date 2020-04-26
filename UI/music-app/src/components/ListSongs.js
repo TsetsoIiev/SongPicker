@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container'
 import AppBar from '@material-ui/core/AppBar';
@@ -23,24 +23,35 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const getSongs = async () => {
-    try {
-        const response = await axios.get('http://localhost:64363/api/Song');
-        console.log(response);
-        return response;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 export default function Create() {
+    useEffect(() => {
+        getSongs().then(setSongs);
+    }, []);
+    
     const classes = useStyles();
-    getSongs();
+
+    const [items, setItems] = useState([]);
+
+    const getSongs = async () => {
+        try {
+            const response = await axios.get('http://localhost:64363/api/Song');
+            const data = response.data;
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const setSongs = (data) => {
+        data.map((item) => {
+            items.push(item);
+        });
+    }
 
     return (
         <div className={classes.div}>
-            <Container maxWidth="md" className={classes.container}>
-                <MediaControlCard />
+            <Container maxWidth="md" className={classes.container} >
+                {items.map((item) => (<MediaControlCard />))}
             </Container>
         </div>
     );
