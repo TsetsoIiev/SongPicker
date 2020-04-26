@@ -7,7 +7,7 @@ const axios = require('axios');
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        margin: theme.spacing(1),
+        margin: theme.spacing(2),
     },
     div: {
         display: 'flex',
@@ -17,35 +17,27 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function Create() {
-    useEffect(() => {
-        getSongs().then(setSongs);
-    }, []);
-    
+export default function ListSongs() {
     const classes = useStyles();
-
     const [items, setItems] = useState([]);
 
-    const getSongs = async () => {
-        try {
-            const response = await axios.get('http://localhost:64363/api/Song');
-            const data = response.data;
-            return data;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    const setSongs = (data) => {
-        data.map((item) => {
-            items.push(item);
-        });
-    }
+    useEffect(() => {
+        axios.get('http://localhost:64363/api/Song')
+            .then(res => {
+                console.log(res);
+                setItems(res.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, []);
 
     return (
         <div className={classes.div}>
             <Container maxWidth="md" className={classes.container} >
-                {items.map((item) => (<MediaControlCard />))}
+                {items.map(item => (
+                <MediaControlCard name={item.name} artist={item.artist}/>
+                ))}
             </Container>
         </div>
     );

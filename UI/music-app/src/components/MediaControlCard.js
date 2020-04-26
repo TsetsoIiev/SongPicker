@@ -9,6 +9,7 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import itunesImg from '../images/tune.png'
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         flex: '1 0 auto',
     },
     cover: {
-        width: '55px',
+        width: 55,
     },
     controls: {
         display: 'flex',
@@ -38,39 +39,27 @@ const useStyles = makeStyles((theme) => ({
 export default function MediaControlCard(props) {
     const classes = useStyles();
     const theme = useTheme();
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [items, setItems] = useState([]);
 
-    useEffect(() => {
-        fetch("http://localhost:64363/api/Song")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result);
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                    console.log(error);
-                }
-            )
-    }, [])
+    const matchesMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const matchesDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
     return (
         <Card className={classes.root}>
-            <CardMedia
+            { 
+            matchesDesktop ? 
+            (<CardMedia
                 className={classes.cover}
                 image={itunesImg}
-                title="YOU ARE WE"
-            />
+                title="img"
+            />) : ( <div> </div> )
+             }
             <CardContent className={classes.content}>
-                    <Typography component="h5" variant="h5">
-                        { props.songName }
-                    </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                        { props.songArtist }
-                     </Typography>
+                <Typography component="h5" variant="h5">
+                    {props.name}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                    {props.artist}
+                </Typography>
             </CardContent>
             <div className={classes.controls}>
                 <IconButton aria-label="previous">

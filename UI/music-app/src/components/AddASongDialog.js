@@ -44,13 +44,13 @@ export default function AddASongDialog() {
     }
 
     const handleAddASongFormSubmit = () => {
-        var data = JSON.stringify({
-            name: name,
-            artist: artist,
-            album: album,
-            genre: genre,
-            year: year
-        });
+        // var data = JSON.stringify({
+        //     name: name,
+        //     artist: artist,
+        //     album: album,
+        //     genre: genre,
+        //     year: year
+        // });
 
         let axiosConfig = {
             headers: {

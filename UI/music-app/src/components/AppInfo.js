@@ -8,7 +8,6 @@ import AddASongDialog from './AddASongDialog';
 const useStyles = makeStyles((theme) => ({
     container: {
         marginTop: theme.spacing(6),
-        height: '30vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
