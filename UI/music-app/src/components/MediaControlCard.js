@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function MediaControlCard() {
+export default function MediaControlCard(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [error, setError] = useState(null);
@@ -65,11 +65,11 @@ export default function MediaControlCard() {
                 title="YOU ARE WE"
             />
             <CardContent className={classes.content}>
-                <Typography component="h5" variant="h5">
-                    Steal the sun
+                    <Typography component="h5" variant="h5">
+                        { props.songName }
                     </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                    While She Sleeps
+                    <Typography variant="subtitle1" color="textSecondary">
+                        { props.songArtist }
                      </Typography>
             </CardContent>
             <div className={classes.controls}>

@@ -10,6 +10,8 @@ namespace SongPicker
 {
     public class Startup
     {
+        private readonly string MyPolicy = "myPolicy";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -22,6 +24,17 @@ namespace SongPicker
         {
             services.AddControllers();
             services.RegisterServices();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyPolicy,
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin()
+                                             .AllowAnyMethod()
+                                             .AllowAnyHeader();
+                                  });
+            });
 
             services.AddSwaggerGen(c =>
             {
@@ -38,7 +51,7 @@ namespace SongPicker
             }
 
             app.UseRouting();
-
+            app.UseCors(MyPolicy);
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
