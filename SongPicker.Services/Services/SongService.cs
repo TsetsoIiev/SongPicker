@@ -1,15 +1,15 @@
-﻿namespace SongPicker.Services.Services
-{
-    using MongoDB.Bson;
-    using MongoDB.Driver;
-    using SongPicker.Services.Enums;
-    using SongPicker.Services.Extensions;
-    using SongPicker.Services.Interfaces;
-    using SongPicker.Services.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using SongPicker.Services.Enums;
+using SongPicker.Services.Extensions;
+using SongPicker.Services.Interfaces;
+using SongPicker.Services.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace SongPicker.Services.Services
+{
     public class SongService : ISongService
     {
         public Song AddSong(SongCreate songCreate)
@@ -50,6 +50,32 @@
             var collection = GetCollection<Song>("SongPicker", "Songs");
 
             var result = collection.AsQueryable().ToList();
+            return result;
+        }
+
+        public List<Song> GetByAttributes(string name, string artist, string album, string genre, string yearFrom, string yearTo)
+        {
+            var collection = GetCollection<Song>("SongPicker", "Songs");
+
+            var result = collection.AsQueryable()
+                .Where(x => x.Name.Contains(name))
+                .Where(x => x.Artist.Contains(artist))
+                .Where(x => x.Album.Contains(album))
+                .Where(x => x.Genre.Contains(genre))
+                .ToList();
+
+            if (int.TryParse(yearFrom, out int yearFromInt))
+            {
+                result
+                    .Where(x => x.Year > yearFromInt);
+            }
+
+            if (int.TryParse(yearTo, out int yearToInt))
+            {
+                result
+                    .Where(x => x.Year < yearToInt);
+            }
+
             return result;
         }
 

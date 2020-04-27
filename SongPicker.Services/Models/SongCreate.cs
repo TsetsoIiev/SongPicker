@@ -1,7 +1,7 @@
-﻿namespace SongPicker.Services.Models
-{
-    using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
+namespace SongPicker.Services.Models
+{
     public class SongCreate
     {
         [Required]
