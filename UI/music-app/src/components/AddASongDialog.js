@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 
@@ -47,13 +44,13 @@ export default function AddASongDialog() {
     }
 
     const handleAddASongFormSubmit = () => {
-        var data = JSON.stringify({
-            name: name,
-            artist: artist,
-            album: album,
-            genre: genre,
-            year: year
-        });
+        // var data = JSON.stringify({
+        //     name: name,
+        //     artist: artist,
+        //     album: album,
+        //     genre: genre,
+        //     year: year
+        // });
 
         let axiosConfig = {
             headers: {
