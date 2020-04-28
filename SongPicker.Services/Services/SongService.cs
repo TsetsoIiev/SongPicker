@@ -63,14 +63,14 @@ namespace SongPicker.Services.Services
             {
                 result.AddRange(collection
                     .AsQueryable()
-                    .Where(x => x.Name == name));
+                    .Where(x => x.Name.ToLower().Contains(name.ToLower())));
             }
 
             if (!string.IsNullOrWhiteSpace(artist))
             {
                 result.AddRange(collection
                     .AsQueryable()
-                    .Where(x => x.Name == name));
+                    .Where(x => x.Artist.ToLower().Contains(artist.ToLower())));
             }
 
             return result.DistinctBy(x => x.Id).ToList();
