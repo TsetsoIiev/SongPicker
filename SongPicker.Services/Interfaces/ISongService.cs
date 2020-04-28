@@ -16,6 +16,6 @@
         
         List<Song> GetAll();
 
-        List<Song> GetByAttributes(string name, string artist, string album, string genre, string yearFrom, string yearTo);
+        List<Song> GetByAttributes(string name, string artist);
     }
 }

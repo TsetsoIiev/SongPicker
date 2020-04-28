@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using MoreLinq;
 using SongPicker.Services.Enums;
 using SongPicker.Services.Extensions;
 using SongPicker.Services.Interfaces;
@@ -53,30 +54,26 @@ namespace SongPicker.Services.Services
             return result;
         }
 
-        public List<Song> GetByAttributes(string name, string artist, string album, string genre, string yearFrom, string yearTo)
+        public List<Song> GetByAttributes(string name, string artist)
         {
             var collection = GetCollection<Song>("SongPicker", "Songs");
+            var result = new List<Song>();
 
-            var result = collection.AsQueryable()
-                .Where(x => x.Name.Contains(name))
-                .Where(x => x.Artist.Contains(artist))
-                .Where(x => x.Album.Contains(album))
-                .Where(x => x.Genre.Contains(genre))
-                .ToList();
-
-            if (int.TryParse(yearFrom, out int yearFromInt))
+            if (!string.IsNullOrWhiteSpace(name))
             {
-                result
-                    .Where(x => x.Year > yearFromInt);
+                result.AddRange(collection
+                    .AsQueryable()
+                    .Where(x => x.Name == name));
             }
 
-            if (int.TryParse(yearTo, out int yearToInt))
+            if (!string.IsNullOrWhiteSpace(artist))
             {
-                result
-                    .Where(x => x.Year < yearToInt);
+                result.AddRange(collection
+                    .AsQueryable()
+                    .Where(x => x.Name == name));
             }
 
-            return result;
+            return result.DistinctBy(x => x.Id).ToList();
         }
 
         public List<Song> GetByAttribute(string parameter, SongAttribute attribute)

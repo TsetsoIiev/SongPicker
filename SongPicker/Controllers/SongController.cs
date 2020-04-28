@@ -36,10 +36,10 @@ namespace SongPicker.Controllers
         }
 
         [HttpGet]
-        [Route("[controller]/query")]
-        public IEnumerable<Song> GetByAttributes(string name, string artist, string genre, string album, string yearFrom, string yearTo)
+        [Route("filter")]
+        public IEnumerable<Song> GetByAttributes(string name, string artist)
         {
-            var result = songService.GetByAttributes(name, artist, album, genre, yearFrom, yearTo);
+            var result = songService.GetByAttributes(name, artist);
 
             return result;
         }

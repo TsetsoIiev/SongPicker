@@ -44,28 +44,28 @@ export default function AddASongDialog() {
     }
 
     const handleAddASongFormSubmit = () => {
-        // var data = JSON.stringify({
-        //     name: name,
-        //     artist: artist,
-        //     album: album,
-        //     genre: genre,
-        //     year: year
-        // });
+        var data = JSON.stringify({
+            name: name,
+            artist: artist,
+            album: album,
+            genre: genre,
+            year: year
+        });
 
         let axiosConfig = {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
                 "Access-Control-Allow-Origin": "*",
             }
-          };
+        };
 
-          const body = JSON.stringify({ name, artist, album, genre, year });
+        const body = JSON.stringify({ name, artist, album, genre, year });
 
         axios.post('http://localhost:64363/api/Song', body, axiosConfig)
-        .then( response  => console.log(response))
-        .catch( error => console.log(error));
+            .then(response => console.log(response))
+            .catch(error => console.log(error));
     };
-    
+
     return (
         <>
             <Button variant="outlined" onClick={handleClickOpen}>
