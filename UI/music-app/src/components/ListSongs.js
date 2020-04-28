@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-    }, 
+    },
     filter: {
         display: 'flex',
         flexDirection: 'row',
@@ -68,6 +68,19 @@ export default function ListSongs() {
     }
 
     const handleSongSearch = () => {
+        if (filterName === '' && filterArtist === '') {
+            axios.get('http://localhost:64363/api/Song')
+                .then(res => {
+                    console.log(res);
+                    setItems(res.data);
+                })
+                .catch(err => {
+                    console.log(err)
+                });
+
+            return;
+        }
+
         axios.get(`http://localhost:64363/api/Song/filter?name=${filterName}&artist=${filterArtist}`)
             .then(res => {
                 console.log(res);
