@@ -25,7 +25,12 @@ let theme= createMuiTheme ({
             root: {
                backgroundSize:'contain', 
             },
-        }
+        },
+        MuiInputBase: {
+            root: {
+                backgroundColor: 'white',
+            },
+        },
     }
 })
 

@@ -4,6 +4,7 @@ import Container from '@material-ui/core/Container'
 import MediaControlCard from './MediaControlCard';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 const axios = require('axios');
 
@@ -20,18 +21,23 @@ const useStyles = makeStyles((theme) => ({
     filter: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginTop: '15px',
+        justifyContent: 'space-around',
+        margin: theme.spacing(2),
     },
     button: {
         backgroundColor: '#817CC1',
         marginLeft: theme.spacing(2),
-        color: '#FFFFFF'
+        color: '#FFFFFF',
+        padding: '6px 40px',
     },
     textField: {
-        marginLeft: theme.spacing(2)
-    }
+        marginLeft: theme.spacing(2),
+        height: theme.spacing(0),
+        backgroundColor: 'white',
+    },
+    title: {
+        marginTop: theme.spacing(4),
+    },
 }));
 
 export default function ListSongs() {
@@ -105,11 +111,12 @@ export default function ListSongs() {
 
     return (
         <div className={classes.div}>
+            <Typography margin="normal" variant="h4" className={classes.title}> My songs </Typography>
             <div className={classes.filter}>
-                <TextField className={classes.textField} id="name" label="Name" variant="outlined" onChange={handleFilterNameChange} />
-                <TextField className={classes.textField} id="artist" label="Artist" variant="outlined" onChange={handleFirterArtistChange} />
+                <TextField className={classes.textField} type="search" size="small" fullWidth id="name" label="Name" variant="outlined" onChange={handleFilterNameChange} />
+                <TextField className={classes.textField} type="search" size="small" fullWidth id="artist" label="Artist" variant="outlined" onChange={handleFirterArtistChange} />
                 <Button className={classes.button} variant="contained" color="primary" type="submit" onClick={handleSongSearch}>Search</Button>
-                <Button className={classes.button} variant="contained" color="primary" type="submit" onClick={clearFilter}>Clear Filter</Button>
+                <Button className={classes.button} variant="contained" color="primary" type="submit" onClick={clearFilter}>Clear</Button>
             </div>
             <Container maxWidth="md" className={classes.container} >
                 {items.map(item => (
